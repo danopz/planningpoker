@@ -116,6 +116,11 @@ android {
                 storePassword DOPLANNINGPOKER_RELEASE_STORE_PASSWORD
                 keyAlias DOPLANNINGPOKER_RELEASE_KEY_ALIAS
                 keyPassword DOPLANNINGPOKER_RELEASE_KEY_PASSWORD
+            } else if (System.getenv('DOPLANNINGPOKER_RELEASE_STORE_FILE')) {
+                storeFile file(System.getenv('DOPLANNINGPOKER_RELEASE_STORE_FILE'))
+                storePassword System.getenv('DOPLANNINGPOKER_RELEASE_STORE_PASSWORD')
+                keyAlias System.getenv('DOPLANNINGPOKER_RELEASE_KEY_ALIAS')
+                keyPassword System.getenv('DOPLANNINGPOKER_RELEASE_KEY_PASSWORD')
             }
         }
     }
