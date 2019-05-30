@@ -2,7 +2,7 @@
 language: android
 jdk: oraclejdk8
 sudo: required
-dist: precise
+# dist: precise
 android:
   components:
     # - tools
@@ -12,19 +12,19 @@ android:
     - extra-google-google_play_services
     - extra-google-m2repository
     - extra-android-m2repository
-  licenses:
-    # - android-sdk-preview-license-.+
-    - android-sdk-license-.+
-    - google-gdk-license-.+
-  before_install:
-    - nvm install 7
-    - node --version
-    - chmod +x ./android/gradlew
-    - openssl aes-256-cbc -K $encrypted_06a6f66ad508_key -iv $encrypted_06a6f66ad508_iv -in ./android/app/release-key.keystore.enc -out ./android/app/release-key.keystore -d
-  install:
-    - npm install
-  script:
-    - cd android && ./gradlew assembleRelease
-  branches:
-    only:
-      - master
+licenses:
+  # - android-sdk-preview-license-.+
+  - android-sdk-license-.+
+  - google-gdk-license-.+
+before_install:
+  - nvm install --lts
+  - node --version
+  - chmod +x ./android/gradlew
+  - openssl aes-256-cbc -K $encrypted_06a6f66ad508_key -iv $encrypted_06a6f66ad508_iv -in ./android/app/release-key.keystore.enc -out ./android/app/release-key.keystore -d
+install:
+  - npm install
+script:
+  - cd android && ./gradlew assembleRelease
+branches:
+  only:
+    - master
