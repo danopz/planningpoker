@@ -1,4 +1,5 @@
 # https://medium.com/@tjkangs/travisci-circleci-2-0-with-fastlane-for-react-native-both-ios-and-android-3f99b71b8691
+# https://android.jlelse.eu/using-travisci-to-securely-build-and-deploy-a-signed-version-of-your-android-app-94afdf5cf5b4
 language: android
 jdk: oraclejdk8
 sudo: required
@@ -25,6 +26,14 @@ install:
   - npm install
 script:
   - cd android && ./gradlew assembleRelease
-branches:
-  only:
-    - master
+deploy:
+  provider: releases
+  skip_cleanup: true
+  overwrite: true
+  file_glob: true
+  api_key:
+    secure: a7u9KAkDGgAiChxFvEMOJG5nJVJObJsap54bWj4TkDYhKNCf8hPslJ8h2DfVruei7nsEg6tTD3bnXAClyAin3B3I+e6byV4Z6prFaC6r1Y4Pm/F3LfgZAA/Xb/Epsl04VOleSdLAekF1CAEWvD/3lmjL3AHm7xWC4DiLyOUXWHCjZfH9d1RL+d5zbXBVnfkvL8+LE+eMMgD9y99Akyf0Ur4xhqA0kL/N0IFpuwT/0Do/d/PcaSvIJAl+GPtI7Co6Ikg4ufj6JAe9B4symM7C7/3ANSl4iKJi28XEEflBC/CbQhctnNmwdfcwgIgrh1Jkqu+jaeUUXlUstoBmS2gOGa1eZlpZm6g+UriT3UUUaracw5+oXMopmKCegO2+WUiygn6xq3kQ5Z1o+0WQS3jG101RtoZXkq7IpGZQ6I7AW/TXwjv3Lc6P5HzFAvEZ8c5XLS/gsVclJa5dvmro9UI3b56kK6jN/ovNzGU4PfPgkThNnQYHgTkwphMdmFNDJRoJI0Jk4AyopoI/0iHScXdU0ocjfrpo+eYz2ABsUlIlY99Y8wEOft4hEqj/HLqzEVf4nq4PQLndpZM0drViBxwA1gkosBmKArlO6RVdydQp06tRMkoaWXJWAeAI2MAol7eKwauDvQPCS1igCDqnv4JRJt+fwk7uK04XJzFEE98BgAk=
+  file: ./android/app/build/outputs/apk/release/*
+  on:
+    repo: danopz/planningpoker
+    tags: true
