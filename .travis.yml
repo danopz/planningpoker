@@ -25,10 +25,10 @@ before_install:
 install:
   - npm install
 script:
-  - cd android && ./gradlew assembleRelease
+  - cd android && ./gradlew assembleRelease && cd -
 before_deploy:
   - echo $PWD
-  - ls -lisa android/app/build/outputs/apk/release
+  - ls -l android/app/build/outputs/apk/release
 deploy:
   provider: releases
   skip_cleanup: true
