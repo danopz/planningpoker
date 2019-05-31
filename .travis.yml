@@ -26,6 +26,9 @@ install:
   - npm install
 script:
   - cd android && ./gradlew assembleRelease
+before_deploy:
+  - echo $PWD
+  - ls -lisa android/app/build/outputs/apk/release
 deploy:
   provider: releases
   skip_cleanup: true
